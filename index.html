@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shajid Mahmud — Admission Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Noto+Serif+Bengali&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0a0a0f;
+    color: #f0ede8;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── Custom Cursor ── */
+  .cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: #fff; border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, background 0.3s, width 0.3s, height 0.3s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s var(--ease), width 0.3s, height 0.3s, border-color 0.3s;
+  }
+
+  /* ── Nav Dots ── */
+  .nav-dots {
+    position: fixed; right: 28px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .nav-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer; transition: all 0.4s var(--ease);
+    position: relative;
+  }
+  .nav-dot::after {
+    content: attr(data-label);
+    position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+    font-size: 10px; font-family: 'DM Sans', sans-serif;
+    color: rgba(255,255,255,0.5); white-space: nowrap;
+    opacity: 0; transition: opacity 0.3s;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .nav-dot:hover::after { opacity: 1; }
+  .nav-dot.active { background: #fff; transform: scale(1.5); }
+  .nav-dot:hover { background: rgba(255,255,255,0.6); }
+
+  /* ── Sections ── */
+  section {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  /* ── Animated BG noise ── */
+  section::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px; pointer-events: none; z-index: 1; opacity: 0.5;
+  }
+
+  .section-inner { position: relative; z-index: 2; width: 100%; max-width: 900px; }
+
+  /* ── PAGE 0: COVER ── */
+  #page-0 {
+    background: linear-gradient(135deg, #0d0d1a 0%, #0a1628 40%, #0d0d1a 100%);
+  }
+  #page-0 .aurora {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 50% at 30% 40%, rgba(100,160,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 60% at 75% 60%, rgba(80,220,200,0.08) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 50% 20%, rgba(180,120,255,0.07) 0%, transparent 50%);
+    animation: auroraShift 8s ease-in-out infinite alternate;
+  }
+  @keyframes auroraShift {
+    0%   { filter: hue-rotate(0deg) brightness(1); }
+    100% { filter: hue-rotate(30deg) brightness(1.15); }
+  }
+
+  .cover-greeting {
+    font-size: clamp(11px, 1.5vw, 14px);
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: rgba(150, 200, 255, 0.7);
+    margin-bottom: 24px;
+    animation: fadeUp 1s var(--ease) 0.2s both;
+  }
+  .cover-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 900; line-height: 0.92;
+    background: linear-gradient(135deg, #ffffff 30%, #93c5fd 60%, #6ee7b7 90%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeUp 1s var(--ease) 0.4s both;
+    letter-spacing: -0.02em;
+  }
+  .cover-divider {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(150,200,255,0.6), transparent);
+    margin: 32px 0;
+    animation: fadeUp 1s var(--ease) 0.6s both;
+  }
+  .cover-info {
+    display: flex; flex-direction: column; gap: 10px;
+    animation: fadeUp 1s var(--ease) 0.8s both;
+  }
+  .cover-info-line {
+    font-size: clamp(14px, 2vw, 18px);
+    color: rgba(240, 237, 232, 0.7);
+    font-weight: 300; letter-spacing: 0.06em;
+  }
+  .cover-info-line strong {
+    color: #93c5fd; font-weight: 500;
+  }
+  .cover-scroll {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 1s var(--ease) 1.4s both;
+    opacity: 0.4;
+  }
+  .cover-scroll span {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 0.8; transform: scaleY(1.2); }
+  }
+
+  /* Floating particles */
+  .particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: rgba(147,197,253,0.15);
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── UNIVERSITY PAGES ── */
+  .uni-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    filter: brightness(0.18) saturate(1.2);
+    transform: scale(1.05);
+    transition: transform 8s ease-out;
+  }
+  section.in-view .uni-bg { transform: scale(1); }
+
+  .uni-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+    opacity: 0.85;
+    mix-blend-mode: multiply;
+  }
+
+  .result-badge {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 10px 24px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    backdrop-filter: blur(20px);
+    margin-bottom: 20px;
+    font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .badge-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent, #6ee7b7);
+    box-shadow: 0 0 10px var(--accent, #6ee7b7);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 4px var(--accent, #6ee7b7); }
+    50% { box-shadow: 0 0 16px var(--accent, #6ee7b7), 0 0 30px var(--accent, #6ee7b7); }
+  }
+
+  .uni-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 80px);
+    font-weight: 900; line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .uni-full-name {
+    font-size: clamp(13px, 1.8vw, 16px);
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 36px; font-weight: 300;
+  }
+
+  /* Result display */
+  .result-display {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .result-card {
+    padding: 20px 28px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(30px);
+    transition: transform 0.3s var(--ease), background 0.3s;
+    flex: 1; min-width: 140px;
+  }
+  .result-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.1);
+  }
+  .result-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 8px;
+  }
+  .result-value {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; line-height: 1;
+    color: var(--accent, #6ee7b7);
+    text-shadow: 0 0 30px var(--accent, rgba(110,231,183,0.4));
+  }
+  .result-sub {
+    font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px;
+  }
+
+  .admitted-stamp {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 20px;
+    background: rgba(110,231,183,0.12);
+    border: 1.5px solid rgba(110,231,183,0.5);
+    border-radius: 8px;
+    color: #6ee7b7;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: stampGlow 3s ease-in-out infinite;
+  }
+  @keyframes stampGlow {
+    0%,100% { box-shadow: 0 0 0 rgba(110,231,183,0); }
+    50% { box-shadow: 0 0 20px rgba(110,231,183,0.3); }
+  }
+
+  /* Divider */
+  .uni-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    margin-bottom: 32px;
+  }
+
+  /* Info grid */
+  .uni-info-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px; margin-bottom: 28px;
+  }
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+  .info-key {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+  .info-val {
+    font-size: 14px; color: rgba(255,255,255,0.75); font-weight: 400;
+  }
+
+  .uni-desc {
+    font-size: clamp(13px, 1.6vw, 15px);
+    color: rgba(255,255,255,0.45);
+    line-height: 1.8; max-width: 640px;
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+
+  .uni-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 12px; letter-spacing: 0.12em;
+    transition: all 0.3s var(--ease);
+  }
+  .uni-link:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .uni-link svg { width: 14px; height: 14px; }
+
+  /* ── FINAL PAGE ── */
+  #page-final {
+    background: linear-gradient(160deg, #050510 0%, #0e0820 50%, #050510 100%);
+  }
+  #page-final .stars {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .star {
+    position: absolute; border-radius: 50%;
+    background: white; animation: twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.4); }
+  }
+
+  .alhamdulillah-arabic {
+    font-family: 'Noto Serif Bengali', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: rgba(253, 224, 71, 0.9);
+    text-align: center;
+    margin-bottom: 24px;
+    text-shadow: 0 0 40px rgba(253,224,71,0.4);
+    animation: gentleGlow 3s ease-in-out infinite;
+    letter-spacing: 0.05em;
+  }
+  @keyframes gentleGlow {
+    0%,100% { text-shadow: 0 0 20px rgba(253,224,71,0.3); }
+    50% { text-shadow: 0 0 50px rgba(253,224,71,0.6), 0 0 80px rgba(253,224,71,0.2); }
+  }
+  .alhamdulillah-main {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 900; text-align: center;
+    background: linear-gradient(135deg, #fde047, #f59e0b, #fde047);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; background-size: 200% 200%;
+    animation: shimmer 4s linear infinite;
+    line-height: 1.2;
+  }
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .alhamdulillah-sub {
+    font-size: clamp(14px, 2vw, 18px);
+    color: rgba(240,237,232,0.45);
+    text-align: center; font-weight: 300;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-top: 16px; margin-bottom: 48px;
+  }
+
+  .journey-recap {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+    max-width: 700px; margin: 0 auto 48px;
+  }
+  .recap-pill {
+    padding: 8px 18px;
+    background: rgba(253,224,71,0.06);
+    border: 1px solid rgba(253,224,71,0.15);
+    border-radius: 50px;
+    font-size: 13px; color: rgba(253,224,71,0.7);
+    transition: all 0.3s var(--ease);
+    cursor: default;
+  }
+  .recap-pill:hover {
+    background: rgba(253,224,71,0.12);
+    color: rgba(253,224,71,1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(253,224,71,0.1);
+  }
+
+  .final-msg {
+    font-size: clamp(15px, 2vw, 18px);
+    color: rgba(240,237,232,0.4);
+    text-align: center; line-height: 1.9;
+    max-width: 520px; font-weight: 300;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .nav-dots { display: none; }
+    section { padding: 50px 24px; }
+    .result-display { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-label="Intro" data-page="0" onclick="scrollToPage(0)"></div>
+  <div class="nav-dot" data-label="BUET" data-page="1" onclick="scrollToPage(1)"></div>
+  <div class="nav-dot" data-label="CUET" data-page="2" onclick="scrollToPage(2)"></div>
+  <div class="nav-dot" data-label="RUET" data-page="3" onclick="scrollToPage(3)"></div>
+  <div class="nav-dot" data-label="MIST" data-page="4" onclick="scrollToPage(4)"></div>
+  <div class="nav-dot" data-label="DU" data-page="5" onclick="scrollToPage(5)"></div>
+  <div class="nav-dot" data-label="CU" data-page="6" onclick="scrollToPage(6)"></div>
+  <div class="nav-dot" data-label="RU" data-page="7" onclick="scrollToPage(7)"></div>
+  <div class="nav-dot" data-label="JU" data-page="8" onclick="scrollToPage(8)"></div>
+  <div class="nav-dot" data-label="JnU" data-page="9" onclick="scrollToPage(9)"></div>
+  <div class="nav-dot" data-label="Alhamdulillah" data-page="10" onclick="scrollToPage(10)"></div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 0 — COVER
+═══════════════════════════════════════════ -->
+<section id="page-0">
+  <div class="aurora"></div>
+  <div class="particles" id="particles"></div>
+  <div class="section-inner">
+    <p class="cover-greeting">Admission Journey · 2025</p>
+    <h1 class="cover-name">Shajid<br>Mahmud</h1>
+    <div class="cover-divider"></div>
+    <div class="cover-info">
+      <p class="cover-info-line"><strong>BUET'CSE-25</strong></p>
+      <p class="cover-info-line">Ex · <strong>Chittagong College</strong></p>
+      <p class="cover-info-line">Ex · <strong>Chattogram Collegiate School</strong></p>
+    </div>
+  </div>
+  <div class="cover-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 — BUET
+═══════════════════════════════════════════ -->
+<section id="page-1" style="--c1:#030d1a;--c2:#061a30;">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/BUET_ECE_Building.jpg/1280px-BUET_ECE_Building.jpg')"></div>
+  <div class="uni-overlay"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#60a5fa;">
+      <span class="badge-dot" style="--accent:#60a5fa;"></span>
+      Engineering · CSE
+    </div>
+
+    <div class="admitted-stamp reveal reveal-delay-1">
+      ✦ Admitted
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-2" style="background:linear-gradient(135deg,#fff,#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">BUET</h2>
+    <p class="uni-full-name reveal reveal-delay-2">Bangladesh University of Engineering & Technology</p>
+
+    <div class="result-display reveal reveal-delay-3">
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#60a5fa;text-shadow:0 0 30px rgba(96,165,250,0.5);">86<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">Nationwide</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Department</div>
+        <div class="result-value" style="color:#6ee7b7;text-shadow:0 0 30px rgba(110,231,183,0.5);font-size:clamp(20px,3vw,32px);line-height:1.2;">CSE</div>
+        <div class="result-sub">Computer Science &<br>Engineering</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-4"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-4">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1962</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Palashi, Dhaka</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Ranking (Bangladesh)</span>
+        <span class="info-val">#1 Engineering</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Students</span>
+        <span class="info-val">~9,500</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-5">
+      BUET is the most prestigious engineering university in Bangladesh, consistently ranked #1 nationally. 
+      With 18 teaching departments and world-class faculty, it produces engineers who lead nationally and globally. 
+      Its CSE department is the most sought-after in the country.
+    </p>
+
+    <a href="https://www.buet.ac.bd" target="_blank" class="uni-link reveal reveal-delay-5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      buet.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — CUET
+═══════════════════════════════════════════ -->
+<section id="page-2" style="--c1:#0f0d00;--c2:#1a1400;">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/4/4c/CUET_Main_Gate.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#1a1000,#2a1f00);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#fbbf24;">
+      <span class="badge-dot" style="--accent:#fbbf24;"></span>
+      Engineering · CUET
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">CUET</h2>
+    <p class="uni-full-name reveal reveal-delay-1">Chittagong University of Engineering & Technology</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#fbbf24;text-shadow:0 0 30px rgba(251,191,36,0.5);">121<sup style="font-size:0.5em">st</sup></div>
+        <div class="result-sub">Nationwide</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1968</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Raozan, Chittagong</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Campus</span>
+        <span class="info-val">Serene hillside</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      CUET is one of Bangladesh's top engineering universities, known for high academic standards 
+      and a beautiful campus in Chittagong. Located in Raozan, it produces highly skilled engineers 
+      who contribute significantly to national development.
+    </p>
+
+    <a href="https://www.cuet.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      cuet.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 — RUET
+═══════════════════════════════════════════ -->
+<section id="page-3">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/3/31/RUET_Administrative_Building.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#0a1a00,#0d2200);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#4ade80;">
+      <span class="badge-dot" style="--accent:#4ade80;"></span>
+      Engineering · RUET
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#86efac);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">RUET</h2>
+    <p class="uni-full-name reveal reveal-delay-1">Rajshahi University of Engineering & Technology</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#4ade80;text-shadow:0 0 30px rgba(74,222,128,0.5);">199<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">Nationwide</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1964</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Rajshahi</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Departments</span>
+        <span class="info-val">14</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Students</span>
+        <span class="info-val">~3,000</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      RUET is the 2nd oldest engineering university in Bangladesh, established in 1964 as Rajshahi 
+      Engineering College. Nestled in the educational hub of North Bengal, it is known for its green 
+      campus described as "a spectacular harmony of architecture and natural beauty."
+    </p>
+
+    <a href="https://www.ruet.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      ruet.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — MIST
+═══════════════════════════════════════════ -->
+<section id="page-4">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/7/70/MIST_Academic_Building.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#10001a,#1a0030);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#c084fc;">
+      <span class="badge-dot" style="--accent:#c084fc;"></span>
+      Engineering · MIST 'A' Unit
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#d8b4fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">MIST</h2>
+    <p class="uni-full-name reveal reveal-delay-1">Military Institute of Science & Technology</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Rank · 'A' Unit</div>
+        <div class="result-value" style="color:#c084fc;text-shadow:0 0 30px rgba(192,132,252,0.5);">411<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">Overall</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1998</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Mirpur, Dhaka</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Type</span>
+        <span class="info-val">Military University</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      MIST is a public university run by the Bangladesh Army. Known for its disciplined environment 
+      and strong engineering programs, it offers undergraduate and postgraduate degrees in engineering, 
+      science, and technology. It's a uniquely structured institution blending military discipline 
+      with academic excellence.
+    </p>
+
+    <a href="https://mist.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      mist.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 — DU
+═══════════════════════════════════════════ -->
+<section id="page-5">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Curzon_Hall_Dhaka.jpg/1280px-Curzon_Hall_Dhaka.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#1a0000,#2a0808);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#f87171;">
+      <span class="badge-dot" style="--accent:#f87171;"></span>
+      'A' Unit · PCMBio answered
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#fca5a5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">DU</h2>
+    <p class="uni-full-name reveal reveal-delay-1">University of Dhaka</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Score</div>
+        <div class="result-value" style="color:#f87171;text-shadow:0 0 30px rgba(248,113,113,0.5);">61<span style="font-size:0.4em;color:rgba(255,255,255,0.3)">/100</span></div>
+        <div class="result-sub">PCMBio Answered</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#fb923c;text-shadow:0 0 30px rgba(251,146,60,0.5);">924<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">'A' Unit</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1921</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Dhaka</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Nickname</span>
+        <span class="info-val">Oxford of the East</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Status</span>
+        <span class="info-val">#1 General Uni</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      The University of Dhaka, founded in 1921, is the oldest and most prestigious general university 
+      in Bangladesh. Often called the "Oxford of the East," it played a pivotal role in Bangladesh's 
+      independence movement. It is home to the country's most vibrant academic and cultural life.
+    </p>
+
+    <a href="https://www.du.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      du.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 6 — CU
+═══════════════════════════════════════════ -->
+<section id="page-6">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/University_of_Chittagong_main_campus.jpg/1280px-University_of_Chittagong_main_campus.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#001515,#002020);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#2dd4bf;">
+      <span class="badge-dot" style="--accent:#2dd4bf;"></span>
+      'A' Unit · Math answered
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#99f6e4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">CU</h2>
+    <p class="uni-full-name reveal reveal-delay-1">University of Chittagong</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Score</div>
+        <div class="result-value" style="color:#2dd4bf;text-shadow:0 0 30px rgba(45,212,191,0.5);">79.65<span style="font-size:0.4em;color:rgba(255,255,255,0.3)">/100</span></div>
+        <div class="result-sub">Math Answered</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#34d399;text-shadow:0 0 30px rgba(52,211,153,0.5);">108<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">'A' Unit</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1966</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Hathazari, Chittagong</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Campus</span>
+        <span class="info-val">1,754 acres — hillside</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      Nestled in the hilly terrain of Hathazari, the University of Chittagong is renowned for its 
+      extraordinarily beautiful, verdant campus — one of the largest in Bangladesh. Established in 1966, 
+      it is the second-largest university in the country and a premier institution for arts, sciences, 
+      and social sciences.
+    </p>
+
+    <a href="https://www.cu.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      cu.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 7 — RU
+═══════════════════════════════════════════ -->
+<section id="page-7">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/University_of_Rajshahi_library.jpg/1280px-University_of_Rajshahi_library.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#0a0018,#12002a);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#a78bfa;">
+      <span class="badge-dot" style="--accent:#a78bfa;"></span>
+      'C' Unit · Math answered
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#c4b5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">RU</h2>
+    <p class="uni-full-name reveal reveal-delay-1">University of Rajshahi</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Score</div>
+        <div class="result-value" style="color:#a78bfa;text-shadow:0 0 30px rgba(167,139,250,0.5);">69<span style="font-size:0.4em;color:rgba(255,255,255,0.3)">/100</span></div>
+        <div class="result-sub">Math Answered</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#818cf8;text-shadow:0 0 30px rgba(129,140,248,0.5);">96<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">'C' Unit</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1953</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Rajshahi</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Campus</span>
+        <span class="info-val">753 acres</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      Rajshahi University, founded in 1953, is the second-largest university in Bangladesh. 
+      Known as a center of academic excellence in North Bengal, its vast 753-acre campus is home 
+      to thousands of students across faculties of science, arts, business, engineering, and law.
+    </p>
+
+    <a href="https://www.ru.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      ru.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 8 — JU
+═══════════════════════════════════════════ -->
+<section id="page-8">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Jahangirnagar_University_Botanical_Garden.jpg/1280px-Jahangirnagar_University_Botanical_Garden.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#001206,#001a0a);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#86efac;">
+      <span class="badge-dot" style="--accent:#86efac;"></span>
+      'A' Unit · Shift 4 (Male)
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#bbf7d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">JU</h2>
+    <p class="uni-full-name reveal reveal-delay-1">Jahangirnagar University</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#86efac;text-shadow:0 0 30px rgba(134,239,172,0.5);">80<sup style="font-size:0.5em">th</sup></div>
+        <div class="result-sub">Shift 4 · Male</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Established</span>
+        <span class="info-val">1970</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Savar, Dhaka</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Campus</span>
+        <span class="info-val">697 acres · Fully Residential</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Speciality</span>
+        <span class="info-val">Only residential uni in BD</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      Jahangirnagar University is Bangladesh's only fully residential university, situated on a 
+      stunning 697-acre natural campus in Savar. Its grounds host 126 species of native birds and 
+      69 migratory species, making it a paradise for nature lovers. Ranked among the top 1000 globally 
+      by Times Higher Education.
+    </p>
+
+    <a href="https://juniv.edu" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      juniv.edu
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 9 — JnU
+═══════════════════════════════════════════ -->
+<section id="page-9">
+  <div class="uni-bg" style="background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jagannath_University_Campus.jpg/1280px-Jagannath_University_Campus.jpg')"></div>
+  <div class="uni-overlay" style="background:linear-gradient(135deg,#150a00,#201000);opacity:0.88;"></div>
+  <div class="section-inner">
+    <div class="result-badge reveal" style="--accent:#fb923c;">
+      <span class="badge-dot" style="--accent:#fb923c;"></span>
+      'A' Unit · Dhaka
+    </div>
+
+    <h2 class="uni-name reveal reveal-delay-1" style="background:linear-gradient(135deg,#fff,#fed7aa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">JnU</h2>
+    <p class="uni-full-name reveal reveal-delay-1">Jagannath University</p>
+
+    <div class="result-display reveal reveal-delay-2">
+      <div class="result-card">
+        <div class="result-label">Score</div>
+        <div class="result-value" style="color:#fb923c;text-shadow:0 0 30px rgba(251,146,60,0.5);">77.5<span style="font-size:0.4em;color:rgba(255,255,255,0.3)">/100</span></div>
+        <div class="result-sub">'A' Unit</div>
+      </div>
+      <div class="result-card">
+        <div class="result-label">Rank</div>
+        <div class="result-value" style="color:#fbbf24;text-shadow:0 0 30px rgba(251,191,36,0.5);">191<sup style="font-size:0.5em">st</sup></div>
+        <div class="result-sub">'A' Unit</div>
+      </div>
+    </div>
+
+    <div class="uni-divider reveal reveal-delay-3"></div>
+
+    <div class="uni-info-grid reveal reveal-delay-3">
+      <div class="info-item">
+        <span class="info-key">Founded</span>
+        <span class="info-val">1858 (as school)</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">University Since</span>
+        <span class="info-val">2005</span>
+      </div>
+      <div class="info-item">
+        <span class="info-key">Location</span>
+        <span class="info-val">Sadarghat, Dhaka</span>
+      </div>
+    </div>
+
+    <p class="uni-desc reveal reveal-delay-4">
+      Jagannath University has a history stretching back to 1858 — one of the oldest educational 
+      institutions in Bangladesh. Located in the heart of old Dhaka near the Buriganga river, it 
+      became a full university in 2005 and has built a strong reputation in arts, sciences, business, 
+      and law.
+    </p>
+
+    <a href="https://jnu.ac.bd" target="_blank" class="uni-link reveal reveal-delay-4">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+      jnu.ac.bd
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAGE 10 — ALHAMDULILLAH
+═══════════════════════════════════════════ -->
+<section id="page-10" id="page-final">
+  <div class="stars" id="stars"></div>
+  <div class="section-inner" style="display:flex;flex-direction:column;align-items:center;">
+
+    <p class="alhamdulillah-arabic reveal">الحمد لله</p>
+    <h2 class="alhamdulillah-main reveal reveal-delay-1">Alhamdulillah<br>for Everything</h2>
+    <p class="alhamdulillah-sub reveal reveal-delay-2">A Journey of Gratitude</p>
+
+    <div class="journey-recap reveal reveal-delay-3">
+      <span class="recap-pill">BUET CSE · 86th ✦ Admitted</span>
+      <span class="recap-pill">CUET · 121st</span>
+      <span class="recap-pill">RUET · 199th</span>
+      <span class="recap-pill">MIST 'A' · 411th</span>
+      <span class="recap-pill">DU 'A' · 61/100 · 924th</span>
+      <span class="recap-pill">CU 'A' · 79.65/100 · 108th</span>
+      <span class="recap-pill">RU 'C' · 69/100 · 96th</span>
+      <span class="recap-pill">JU 'A' · 80th</span>
+      <span class="recap-pill">JnU 'A' · 77.5/100 · 191st</span>
+    </div>
+
+    <p class="final-msg reveal reveal-delay-4">
+      "Every door opened, every door tested — <br>
+      all was exactly as it was meant to be. <br>
+      The best is yet to come. 🤲"
+    </p>
+
+  </div>
+</section>
+
+<script>
+// ── Cursor ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animCursor);
+})();
+
+// ── Particles ──
+const pc = document.getElementById('particles');
+for (let i = 0; i < 24; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const s = Math.random() * 4 + 2;
+  p.style.cssText = `width:${s}px;height:${s}px;left:${Math.random()*100}%;
+    animation-duration:${12+Math.random()*20}s;animation-delay:${Math.random()*15}s;
+    opacity:${0.1+Math.random()*0.3};`;
+  pc.appendChild(p);
+}
+
+// ── Stars ──
+const sc = document.getElementById('stars');
+for (let i = 0; i < 120; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;
+    animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s;`;
+  sc.appendChild(s);
+}
+
+// ── Scroll & Nav ──
+const sections = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.nav-dot');
+
+function scrollToPage(i) {
+  sections[i].scrollIntoView({ behavior: 'smooth' });
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = [...sections].indexOf(entry.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+      entry.target.classList.add('in-view');
+      entry.target.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    }
+  });
+}, { threshold: 0.35 });
+
+sections.forEach(s => observer.observe(s));
+
+// Trigger page 0 immediately
+sections[0].querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+</script>
+</body>
+</html>
