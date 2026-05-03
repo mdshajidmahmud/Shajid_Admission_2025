@@ -317,8 +317,8 @@
   .uni-link svg { width: 14px; height: 14px; }
 
   /* ── FINAL PAGE ── */
-  #page-final {
-    background: linear-gradient(160deg, #050510 0%, #0e0820 50%, #050510 100%);
+  .page-final {
+    background: #000000;
   }
   #page-final .stars {
     position: absolute; inset: 0; pointer-events: none;
@@ -370,23 +370,73 @@
   }
 
   .journey-recap {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
-    max-width: 700px; margin: 0 auto 48px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 14px;
+    max-width: 760px; margin: 0 auto 48px;
   }
   .recap-pill {
-    padding: 8px 18px;
-    background: rgba(253,224,71,0.06);
-    border: 1px solid rgba(253,224,71,0.15);
+    padding: 10px 22px;
     border-radius: 50px;
-    font-size: 13px; color: rgba(253,224,71,0.7);
-    transition: all 0.3s var(--ease);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: all 0.35s var(--ease);
     cursor: default;
+    border: 1.5px solid transparent;
+    position: relative;
+    animation: pillFloat ease-in-out infinite;
+  }
+  @keyframes pillFloat {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
   }
   .recap-pill:hover {
-    background: rgba(253,224,71,0.12);
-    color: rgba(253,224,71,1);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(253,224,71,0.1);
+    transform: translateY(-6px) scale(1.06) !important;
+    filter: brightness(1.25);
+  }
+  /* Individual pill colours */
+  .recap-pill:nth-child(1) {
+    background: rgba(96,165,250,0.12); border-color: rgba(96,165,250,0.5);
+    color: #93c5fd; box-shadow: 0 0 18px rgba(96,165,250,0.2), 0 4px 20px rgba(96,165,250,0.1);
+    animation-duration: 3.2s; animation-delay: 0s;
+  }
+  .recap-pill:nth-child(2) {
+    background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.5);
+    color: #fcd34d; box-shadow: 0 0 18px rgba(251,191,36,0.2), 0 4px 20px rgba(251,191,36,0.1);
+    animation-duration: 3.8s; animation-delay: 0.3s;
+  }
+  .recap-pill:nth-child(3) {
+    background: rgba(74,222,128,0.12); border-color: rgba(74,222,128,0.5);
+    color: #86efac; box-shadow: 0 0 18px rgba(74,222,128,0.2), 0 4px 20px rgba(74,222,128,0.1);
+    animation-duration: 4.1s; animation-delay: 0.6s;
+  }
+  .recap-pill:nth-child(4) {
+    background: rgba(192,132,252,0.12); border-color: rgba(192,132,252,0.5);
+    color: #d8b4fe; box-shadow: 0 0 18px rgba(192,132,252,0.2), 0 4px 20px rgba(192,132,252,0.1);
+    animation-duration: 3.5s; animation-delay: 0.9s;
+  }
+  .recap-pill:nth-child(5) {
+    background: rgba(248,113,113,0.12); border-color: rgba(248,113,113,0.5);
+    color: #fca5a5; box-shadow: 0 0 18px rgba(248,113,113,0.2), 0 4px 20px rgba(248,113,113,0.1);
+    animation-duration: 4.4s; animation-delay: 0.2s;
+  }
+  .recap-pill:nth-child(6) {
+    background: rgba(45,212,191,0.12); border-color: rgba(45,212,191,0.5);
+    color: #99f6e4; box-shadow: 0 0 18px rgba(45,212,191,0.2), 0 4px 20px rgba(45,212,191,0.1);
+    animation-duration: 3.9s; animation-delay: 0.5s;
+  }
+  .recap-pill:nth-child(7) {
+    background: rgba(167,139,250,0.12); border-color: rgba(167,139,250,0.5);
+    color: #c4b5fd; box-shadow: 0 0 18px rgba(167,139,250,0.2), 0 4px 20px rgba(167,139,250,0.1);
+    animation-duration: 4.2s; animation-delay: 0.8s;
+  }
+  .recap-pill:nth-child(8) {
+    background: rgba(134,239,172,0.12); border-color: rgba(134,239,172,0.5);
+    color: #bbf7d0; box-shadow: 0 0 18px rgba(134,239,172,0.2), 0 4px 20px rgba(134,239,172,0.1);
+    animation-duration: 3.6s; animation-delay: 0.4s;
+  }
+  .recap-pill:nth-child(9) {
+    background: rgba(251,146,60,0.12); border-color: rgba(251,146,60,0.5);
+    color: #fed7aa; box-shadow: 0 0 18px rgba(251,146,60,0.2), 0 4px 20px rgba(251,146,60,0.1);
+    animation-duration: 4.0s; animation-delay: 0.7s;
   }
 
   .final-msg {
@@ -996,7 +1046,7 @@
 <!-- ═══════════════════════════════════════════
      PAGE 10 — ALHAMDULILLAH
 ═══════════════════════════════════════════ -->
-<section id="page-10" id="page-final">
+<section id="page-10" class="page-final">
   <div class="stars" id="stars"></div>
   <div class="section-inner" style="display:flex;flex-direction:column;align-items:center;">
 
